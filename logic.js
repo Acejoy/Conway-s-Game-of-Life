@@ -221,3 +221,13 @@ startBtn.addEventListener('click', startGame);
 stopBtn = document.getElementById("Stop");
 stopBtn.disabled = true; 
 stopBtn.addEventListener('click', stopGame);
+
+clearBtn = document.getElementById("Clear");
+clearBtn.addEventListener('click', function(){
+
+    for(idx=0; idx<liveCells.length; idx++){
+        drawRectangle(context, [liveCells[idx]]);
+    }
+
+    liveCells = [];
+});
