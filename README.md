@@ -6,7 +6,7 @@ We have :
 
 * Start Button-To start Game
 * Clear Button: Clear Board
-* Stop Button: Stops Game. 
+* Stop Button: Stops Game.
 
 ## Pics
 
