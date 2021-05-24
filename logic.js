@@ -21,9 +21,19 @@ function getCursorPosition(canvas, event, arr, canvasContext) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    arr.push(getRecCordinates(x, y));
-    drawPixels(canvasContext, arr, "#a2a4a6");
-    console.log("x: " + x + " y: " + y);
+
+    var rec_coord = getRecCordinates(x, y);
+
+    if (isLive(arr, rec_coord)) {
+        console.log('removed:'+rec_coord);
+        arr = removeCoord(arr, rec_coord);
+        drawRectangle(canvasContext, [rec_coord]);
+    } else {
+        arr.push(rec_coord);
+        drawPixels(canvasContext, arr, "#a2a4a6");
+    }
+
+    return arr;
 };
 
 function drawPixels(canvasContext, arr, style) {
@@ -63,6 +73,20 @@ function drawRectangle(canvasContext, arr) {
 
     context.stroke();
 };
+
+
+function removeCoord(arr, val) {
+
+    var newArr = new Array();
+
+    for (idx = 0; idx < arr.length; idx++) {
+        if (arr[idx][0] != val[0] && arr[idx][1] != val[1]) {
+            newArr.push([arr[idx][0], arr[idx][1]]);
+        }
+    }
+    return newArr;
+}
+
 
 function isLive(liveArray, coords) {
 
@@ -158,6 +182,8 @@ function updateCanvas(canvasCtx, liveArray) {
 function startGame() {
     // liveCells = updateCanvas(context, liveCells);
     // console.log(liveCells);
+    document.getElementById("Start").disabled = true; 
+    document.getElementById("Stop").disabled = false; 
     myTimer = setInterval(function () {
         liveCells = updateCanvas(context, liveCells)
     },
@@ -167,6 +193,8 @@ function startGame() {
 
 function stopGame() {
     clearInterval(myTimer);
+    document.getElementById("Start").disabled = false; 
+    document.getElementById("Stop").disabled = true; 
 }
 
 for (x = 0.5; x < canvasWidth; x += cellSize) {
@@ -184,11 +212,12 @@ context.strokeStyle = "#97999c";
 context.stroke();
 
 canvas.addEventListener('mousedown', function (e) {
-    getCursorPosition(canvas, e, liveCells, context);
+    liveCells = getCursorPosition(canvas, e, liveCells, context);
 });
 
 startBtn = document.getElementById("Start");
 startBtn.addEventListener('click', startGame);
 
 stopBtn = document.getElementById("Stop");
+stopBtn.disabled = true; 
 stopBtn.addEventListener('click', stopGame);
