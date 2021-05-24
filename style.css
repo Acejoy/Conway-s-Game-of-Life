@@ -3,7 +3,8 @@
   }
   
   body {
-    background-color: #333;
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -16,9 +17,37 @@
   
   #canvas {
     background: #ffffff;
-    border-radius: 5px;
+    border-radius: 10px;
   }
   
   #source {
     display: none;
   }
+
+  button {
+    padding: 15px 25px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #2B86C5;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    margin: 1rem;
+  }
+  
+  button:hover {background-color: #135a8d}
+  
+  button:active {
+    background-color: #135a8d;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+  button:disabled {    
+    cursor: not-allowed;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

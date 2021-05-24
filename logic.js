@@ -1,4 +1,4 @@
-const cellSize = 10;
+const cellSize = 20;
 const interval = 100;
 var liveCells = new Array();
 var canvas = document.getElementById("canvas");
